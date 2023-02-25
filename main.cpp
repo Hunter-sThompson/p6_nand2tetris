@@ -1,4 +1,6 @@
 #include "parser.h"
+#include "symbolTable.h"
+#include "assembler.h"
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -53,8 +55,16 @@ bool input_handler(int argc, char* argv[]) {
     return true;
 }
 
+void writeFile(string contents, char* file_name) {
+    ofstream out(file_name);
+    out << contents;  
+    out.close();
+}
+
 int main(int argc, char *argv[]) {
     
+    string opaque_blob;
+
     if (!input_handler(argc, argv)) {
         cout << "Runtime Error" << endl;
         exit(-1);
@@ -62,16 +72,16 @@ int main(int argc, char *argv[]) {
     cout << "Input Valid" << endl;
 
     string contents = readContents(argv[1]);
-
     vector<string> instructions = splitToInstructions(contents);
+
+    initSymbolTable();
     
-    cout << "The number of instructions is: " << instructions.size() << endl;
-    for (int i = 0; i < instructions.size(); i++) {
-        cout << "Instruction " << i << ": " << instructions[i];
-        if (isspace(instructions[i][0])) { cout << "Theres a space!" << endl; }
-        cout << '\n';
+    opaque_blob = assemble(instructions[0]);
+    for (int i = 1; i < instructions.size(); i++) {
+        opaque_blob = opaque_blob + "\n" + assemble(instructions[i]);
     }
 
+    writeFile(opaque_blob, argv[3]);
     cout << "Done" << endl;
     return 0;
 }

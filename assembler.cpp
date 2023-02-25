@@ -1,6 +1,9 @@
+#include "assembler.h"
+#include "symbolTable.h"
 #include <iostream>
 #include <string>
 using namespace std;
+
 string assemble(string instruction) {
     string binary = "";
     if (instruction[0] == '@') { // A-instruction

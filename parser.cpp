@@ -22,7 +22,7 @@ vector<string> splitToInstructions(const string &contents) {
     // I presume this getline is interfering with isspace?
     // Since white space gets to the vector, although i check it.
     while (getline(ss, instruction, '\n')) {
-        if (instruction[0] == '/' || isspace(instruction[0])) {
+        if (instruction[0] == '/' || instruction.size() < 2) {
             continue;
         } else {
             instructions.push_back(instruction);
