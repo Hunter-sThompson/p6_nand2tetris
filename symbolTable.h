@@ -48,7 +48,7 @@ static std::unordered_map<std::string, std::string> destTable = {
 };
 
 static std::unordered_map<std::string, std::string> jumpTable = {
-    {"", "000"},
+    {"000", "000"},
     {"JGT", "001"},
     {"JEQ", "010"},
     {"JGE", "011"},

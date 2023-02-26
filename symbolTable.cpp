@@ -5,9 +5,6 @@
 #include <unordered_map>
 using namespace std;
 
-//unordered_map<string, int> symbolTable;
-
-
 void initSymbolTable() {
 	symbolTable["SP"] = 0;
     symbolTable["LCL"] = 1;

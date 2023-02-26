@@ -6,7 +6,7 @@ main.exe:
 
 test:
 	@make main.exe
-	./main.exe Add.asm -o Add.hack
+	./main.exe Max.asm -o Max.hack
 	@make clean
 
 clean:

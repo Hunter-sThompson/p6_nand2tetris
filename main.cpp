@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
     }
 
     writeFile(opaque_blob, argv[3]);
-    cout << "Done" << endl;
+    
+    cout << argv[1] << " successfully assembled to machine code to file " << argv[3] << endl;
     return 0;
 }
