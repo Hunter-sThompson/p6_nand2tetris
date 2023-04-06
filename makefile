@@ -2,7 +2,7 @@
 all: main.exe
 
 main.exe:
-	g++ -std=c++11 main.cpp parser.cpp assembler.cpp symbolTable.cpp -O2 -o main.exe
+	g++ -Wall -Wextra -std=c++11 ./src/main.cpp ./src/parser.cpp ./src/assembler.cpp ./src/symbolTable.cpp -O2 -o main.exe
 
 test:
 	@make main.exe
