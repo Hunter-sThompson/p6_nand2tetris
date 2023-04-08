@@ -1,9 +1,11 @@
 #include "parser.h"
+#include "symbolTable.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <unordered_map>
 using namespace std;
 
 string readContents(char* file_name) {
@@ -35,15 +37,22 @@ vector<string> splitToInstructions(const string &contents) {
     vector<string> instructions;
     stringstream ss(contents);
     string instruction;
-    
+
+    int line_number = 0; 
     while (getline(ss, instruction, '\n')) {
+        // || instruction.find('(') != string::npos
+        trimInstruction(instruction);
         if (instruction[0] == '/' || instruction.size() < 2) {
+	    cout << instruction << " ------------ ERROR" << endl;
+            continue;
+        } else if (instruction.find('(') != string::npos) {
+            string label = instruction.substr(1, instruction.size() - 2);
+            addSymbol(label, line_number);
+            cout << "Label: " << label << " at " << line_number << endl;
             continue;
         } else {
-
-            trimInstruction(instruction);
-
             instructions.push_back(instruction);
+            line_number++;
         }
     }
     return instructions;

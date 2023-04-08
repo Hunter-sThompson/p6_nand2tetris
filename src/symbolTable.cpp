@@ -12,14 +12,19 @@ void print_map(unordered_map<K, V> const &m)
         cout << "{" << (*it).first << ": " << (*it).second << "}\n";
     }
 }
+
 void newSymbolHandler(int &address, string &symbol) {
     if (symbolTable.find(symbol) != symbolTable.end()) {
         address = symbolTable[symbol];
 	//cout << "Symbol found: " << symbol << " at address " << address << endl;
         return;
     } else {
-        int nextAddress = symbolTable.size();
-	//cout << "Symbol added: " << symbol << " to address " << nextAddress << endl;
+	
+	// nextaddress should be determined before hand. Starting from @R0, line numbers must be tracked,
+	// if theres a label like (label), then the line number minus one, should be set as adress for @label
+	// Then (label) will be omitted, so line num does not interfere with others
+        int nextAddress = symbolTable.size() - 9;
+	cout << "Symbol added: " << symbol << " to address " << nextAddress << endl;
         addSymbol(symbol, nextAddress);
         address = nextAddress;
         return;
@@ -41,8 +46,6 @@ void initSymbolTable() {
         symbolTable[symbol] = i;
     }
 }
-
-
 
 void addSymbol(string symbol, int address) {
 	symbolTable[symbol] = address;

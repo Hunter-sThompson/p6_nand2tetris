@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     vector<string> instructions = splitToInstructions(contents);
 
     initSymbolTable();
-    
+
     opaque_blob = assemble(instructions[0]);
     for (int i = 1; i < instructions.size(); i++) {
         cout << i << ". Assembling instruction: " << instructions[i] << endl;

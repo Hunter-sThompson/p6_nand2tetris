@@ -6,7 +6,7 @@ main.exe:
 
 test:
 	@make main.exe
-	./main.exe Max.asm -o Max.hack
+	./main.exe pong/Pong.asm -o PongTest.hack
 	@make clean
 
 clean:
